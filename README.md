@@ -1,4 +1,4 @@
-# Eval_Image_Retrieval
+# Eval_Image_Retrieval and Cross Model Retrieval
 A script on evalling Image Retrieval Model
 ### 一个简单的自动脚本
 ## 一个用于评估图像检索模型性能的算法总结

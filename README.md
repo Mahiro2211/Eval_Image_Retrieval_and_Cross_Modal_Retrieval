@@ -1,5 +1,7 @@
 # Eval_Image_Retrieval and Cross-Modal Retrieval
 A script on eval Image Retrieval Model
+<img width="891" alt="image" src="https://github.com/Mahiro2211/Eval_Image_Retrieval_and_Cross_Model_Retrieval/assets/130811701/b7ea8fc7-58d3-421f-9a98-567916fe27ad">
+
 ### 一个简单的自动脚本
 ## 一个用于评估图像检索模型性能的算法总结
 * PH@2 基于汉明半径的检索系统的精确率

@@ -6,7 +6,7 @@ from Utils.NDCG import cal_NDCG
 import glob
 
 class Mat_index():
-    def __init__(self , dataset , filepath ,color='blue' , modelname='DSH' ,K=[0, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000]):
+    def __init__(self , dataset , filepath ,color='blue' , modelname='DSH' ,K=[1, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000]):
         print('mat文件的命名规则是{binary_bits}-{dataset}-{modelname}')
         self.modelname = modelname
         self.dataset = dataset

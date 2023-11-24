@@ -9,7 +9,7 @@ import glob
 class Cross_Mat_index(Mat_index):
     def __init__(self, dataset , filepath,i2t,t2i ,color='blue' ,
                  modelname='DSH'
-                 ,K=[0, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000],
+                 ,K=[1, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000],
                  ):
         # super().__init__()
         print('mat文件的命名规则是{binary_bits}-{dataset}-{modelname}')

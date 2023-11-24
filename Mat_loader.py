@@ -92,22 +92,34 @@ class Mat_index():
 
     def phamming2(self , num=10):
         iter_mat = iter(self.load_mat())
-        ph2 = np.array([])
+        ph2 = np.zeros((5,2))
+        start = 0
         recall_ph2 = np.array([])
         Map = np.array([])
         while True:
             try:
                 qb , rb , ql , rl = next(iter_mat)
+                rl[rl == -1] = 0
+                ql[ql == -1] = 0
                 self.bits = qb.shape[1]
                 print(f'Calculating {self.bits} ......')
                 precision, recall, map = get_precision_recall_by_Hamming_Radius(database_output=rb,
                                                                                 database_labels=rl,
                                                                                 query_output=qb,
                                                                                 query_labels=ql)
-                ph2 = np.append(ph2 , precision)
+                # ph2 = np.append(ph2 , [self.bits,precision],axis=1)
+                ph2[start] = [self.bits,precision] 
+                start = start + 1               
 
             except StopIteration:
-                np.savetxt(f'./Result/PH@2_{self.bits}_{self.dataset}_{self.modelname}',ph2,delimiter=',')
+                print(ph2)
+                # exit()
+                first_coloum = ph2[:,0]
+                indice = np.argsort(first_coloum)
+                
+                new_ph2 = ph2[indice]
+                print(new_ph2)
+                np.savetxt(f'./Result/PH@2_{self.dataset}_{self.modelname}',new_ph2,delimiter=' ')
                 print('Finish computing PH@2')
                 break
 

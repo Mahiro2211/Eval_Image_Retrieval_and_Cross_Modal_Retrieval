@@ -3,7 +3,7 @@ import loguru
 import argparse
 from Cross_Model_Eval import *
 def main():
-    print('mat文件的命名规则是{binary_bits}-{dataset}-{modelname}.mat ')
+    print('mat文件的命名规则是{binary_bits}-{modelname}-{dataset}.mat ')
     parser = argparse.ArgumentParser(description='Get Mat index')
     parser.add_argument('--file',default='./MAT/Flickr25k',help='path to mat')
     parser.add_argument('--dataset',default='flickr25k',help='name of dataset')

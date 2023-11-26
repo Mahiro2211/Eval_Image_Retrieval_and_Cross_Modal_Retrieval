@@ -12,7 +12,7 @@ class Cross_Mat_index(Mat_index):
                  ,K=[1, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000],
                  ):
         # super().__init__()
-        print('mat文件的命名规则是{binary_bits}-{dataset}-{modelname}')
+        print('mat文件的命名规则是{binary_bits}-{modelname}-{dataset}')
         self.modelname = modelname
         self.dataset = dataset
         self.filepath = filepath
@@ -25,7 +25,7 @@ class Cross_Mat_index(Mat_index):
 
     def load_mat(self): # 迭代器
         test = 'i2t' if self.i2t else 't2i'
-        file_list = glob.glob(os.path.join(self.filepath,f'*{self.dataset}*{test}*.mat'))
+        file_list = glob.glob(os.path.join(self.filepath,f'*{modelname}*{self.dataset}*{test}*.mat'))
         print(file_list)
         file_basename = [os.path.splitext(os.path.basename(f))[0] for f in file_list]
         # self.basename = file_basename

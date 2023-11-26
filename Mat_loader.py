@@ -7,7 +7,7 @@ import glob
 
 class Mat_index():
     def __init__(self , dataset , filepath ,color='blue' , modelname='DSH' ,K=[1, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000]):
-        print('mat文件的命名规则是{binary_bits}-{dataset}-{modelname}')
+        print('mat文件的命名规则是{binary_bits}-{modelname}-{dataset}')
         self.modelname = modelname
         self.dataset = dataset
         self.filepath = filepath

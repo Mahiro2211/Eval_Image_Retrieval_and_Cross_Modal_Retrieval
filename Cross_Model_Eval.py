@@ -149,15 +149,22 @@ class Cross_Mat_index(Mat_index):
         Map = np.array([])
         while True:
             try:
-                qb , rb , ql , rl = next(iter_mat)
+                qib, rib, qtb, rtb, ql, rl = next(iter_mat)
                 rl[rl == -1] = 0
                 ql[ql == -1] = 0
-                self.bits = qb.shape[1]
+                self.bits = qib.shape[1]
                 print(f'Calculating {self.bits} ......')
-                precision, recall, map = get_precision_recall_by_Hamming_Radius(database_output=rb,
-                                                                                database_labels=rl,
-                                                                                query_output=qb,
-                                                                                query_labels=ql)
+                if self.i2t:
+                    precision, recall, map = get_precision_recall_by_Hamming_Radius(database_output=rtb,
+                                                                                    database_labels=rl,
+                                                                                    query_output=qib,
+                                                                                    query_labels=ql)
+                else:
+                    precision, recall, map = get_precision_recall_by_Hamming_Radius(database_output=rib,
+                                                                                    database_labels=rl,
+                                                                                    query_output=qtb,
+                                                                                    query_labels=ql)
+
                 # ph2 = np.append(ph2 , [self.bits,precision],axis=1)
                 ph2[start] = [self.bits,precision] 
                 start = start + 1               
@@ -170,6 +177,10 @@ class Cross_Mat_index(Mat_index):
                 
                 new_ph2 = ph2[indice]
                 print(new_ph2)
-                np.savetxt(f'./Result/PH@2_{self.dataset}_{self.modelname}',new_ph2,delimiter=' ')
+                if self.i2t:
+                    np.savetxt(f'./Result/PH@2_i2t_{self.dataset}_{self.modelname}', new_ph2, delimiter=' ')
+                else :
+                    np.savetxt(f'./Result/PH@2_t2i_{self.dataset}_{self.modelname}', new_ph2, delimiter=' ')
                 print('Finish computing PH@2')
                 break
+

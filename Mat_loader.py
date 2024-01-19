@@ -4,7 +4,9 @@ from loguru import logger
 from Utils import PR_Curve as PR
 from Utils.NDCG import cal_NDCG
 import glob
-
+"""
+    用来检索单个方法的N个数据集
+"""
 class Mat_index():
     def __init__(self , dataset , filepath ,color='blue' , modelname='DSH' ,K=[1, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000]):
         print('mat文件的命名规则是{binary_bits}-{modelname}-{dataset}')
@@ -17,7 +19,7 @@ class Mat_index():
         self.baseroot = './Result'
 
     def load_mat(self): # 迭代器
-        file_list = glob.glob(os.path.join(self.filepath,f'*{self.dataset}*.mat'))
+        file_list = glob.glob(os.path.join(self.filepath,f'*{self.modelname}*{self.dataset}*.mat'))
         print(file_list)
         file_basename = [os.path.splitext(os.path.basename(f))[0] for f in file_list]
         mat_dict = {i : scio.loadmat(file_list[i]) for i in range(len(file_list))}
@@ -37,7 +39,10 @@ class Mat_index():
                 rb = torch.from_numpy(rb)
                 ql = torch.from_numpy(ql)
                 rl = torch.from_numpy(rl)
+                rl[rl == -1] = 0
+                ql[ql == -1] = 0
                 p, r = PR.pr_curve(qb, rb, ql, rl)
+                
                 save_csv('saved_index_pr',p,r,f'{self.bits}_{self.dataset}_Precison',f'{self.bits}_{self.dataset}_Recall')
             except StopIteration :
                 print("Finish computing PRcurve")
@@ -51,6 +56,8 @@ class Mat_index():
                 ql = np.squeeze(ql)
                 rl = np.squeeze(rl)
                 recallK = []
+                rl[rl == -1] = 0
+                ql[ql == -1] = 0
                 for i in self.K:
                     print(i)
                     _,a,_= mean_average_precision_normal_optimized_topK(rb,rl,qb,ql,i)
@@ -70,6 +77,8 @@ class Mat_index():
                 rl = np.squeeze(rl)
                 K = self.K
                 P = []
+                rl[rl == -1] = 0
+                ql[ql == -1] = 0
                 for i in self.K:
                     print(i)
                     a,_,_ = mean_average_precision_normal_optimized_topK(rb, rl, qb, ql, i)
@@ -85,6 +94,8 @@ class Mat_index():
         while True:
             try:
                 qb , rb , ql , rl = next(iter_mat)
+                rl[rl == -1] = 0
+                ql[ql == -1] = 0
                 self.bits = qb.shape[1]
                 logger.info(f'{self.bits}_{self.dataset}_NDCG : {cal_NDCG(qb,rb,ql,rl,what=0,k=1000)}')
             except StopIteration:
@@ -122,12 +133,3 @@ class Mat_index():
                 np.savetxt(f'./Result/PH@2_{self.dataset}_{self.modelname}',new_ph2,delimiter=' ')
                 print('Finish computing PH@2')
                 break
-
-
-
-
-
-
-#%%
-
-#%%

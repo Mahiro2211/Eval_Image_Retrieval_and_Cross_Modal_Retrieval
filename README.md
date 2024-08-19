@@ -1,8 +1,7 @@
-# Eval_Image_Retrieval and Cross-Modal Retrieval
+# 用于深度哈希图像检索和深度哈希跨模态检索的性能评估算法的计算脚本
 A script on eval Image Retrieval Model
 * [2023-11-30]-automatic script dealing with the CSV file will be released
 * [2023-11-25]-fix the bug in saving result for csv file in PH@2 computing and fix the top @ K list index
-<img width="891" alt="image" src="https://github.com/Mahiro2211/Eval_Image_Retrieval_and_Cross_Model_Retrieval/assets/130811701/b7ea8fc7-58d3-421f-9a98-567916fe27ad">
 
 ### 一个简单的自动脚本
 ## 一个用于评估图像检索模型性能的算法总结

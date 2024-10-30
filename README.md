@@ -1,4 +1,13 @@
 # 用于深度哈希图像检索和深度哈希跨模态检索的性能评估算法的计算脚本
+## MAT文件命名的key命名规则
+**使用scipy库的savemat方法来保存mat文件，以下是两个模态的命名键值命名方式**
+### 单模态
+![图片](https://github.com/user-attachments/assets/cb14a032-5850-47eb-a648-0508fe2304f0)
+
+### 跨模态
+![图片](https://github.com/user-attachments/assets/88a1cea1-2284-4779-8146-e9ef8d84a0b8)
+
+
 A script on eval Image Retrieval Model
 * [2023-11-30]-automatic script dealing with the CSV file will be released
 * [2023-11-25]-fix the bug in saving result for csv file in PH@2 computing and fix the top @ K list index
